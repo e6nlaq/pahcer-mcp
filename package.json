@@ -1,0 +1,27 @@
+{
+  "name": "pahcer-mcp",
+  "description": "A MCP server for Pahcer",
+  "version": "0.0.1",
+  "author": "e6nlaq",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@biomejs/biome": "2.2.4",
+    "@modelcontextprotocol/inspector": "^0.16.8",
+    "@types/bun": "latest",
+    "@types/node": "^24.6.1"
+  },
+  "peerDependencies": {
+    "commander": "^14.0.1",
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@commander-js/extra-typings": "^14.0.0",
+    "fastmcp": "^3.18.0"
+  },
+  "scripts": {
+    "dev": "mcp-inspector bun src/index.ts",
+    "start": "bun run src/index.ts"
+  }
+}
