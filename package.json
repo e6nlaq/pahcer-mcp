@@ -1,9 +1,8 @@
 {
   "name": "pahcer-mcp",
   "description": "A MCP server for Pahcer",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "author": "e6nlaq",
-  "module": "index.ts",
   "type": "module",
   "private": true,
   "devDependencies": {
@@ -23,5 +22,8 @@
   "scripts": {
     "dev": "mcp-inspector bun src/index.ts",
     "start": "bun run src/index.ts"
+  },
+  "bin": {
+    "pahcer-mcp": "src/index.ts"
   }
 }
