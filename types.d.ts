@@ -1,5 +1,5 @@
 declare module "bun" {
   interface Env {
-    INSTALLED_PAHCER?: true|undefined;
+    INSTALLED_PAHCER?: "true"|undefined;
   }
 }

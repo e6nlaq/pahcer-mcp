@@ -1,7 +1,7 @@
 import {test, expect} from "bun:test";
 import {isInstalledPahcer} from "../src/pahcer";
 
-test.if(process.env.INSTALLED_PAHCER === true)("pahcer is installed", async () => {
+test.if(process.env.INSTALLED_PAHCER === "true")("pahcer is installed", async () => {
     expect(await isInstalledPahcer()).toBe(true);
 })
 
