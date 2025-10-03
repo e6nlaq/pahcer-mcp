@@ -4,3 +4,5 @@ export async function isInstalledPahcer() {
 	const { exitCode } = await $`pahcer --version`.nothrow().quiet();
 	return exitCode === 0;
 }
+
+export async function isInited() {}

@@ -2,6 +2,7 @@ import { Command } from "@commander-js/extra-typings";
 import { $ } from "bun";
 import packageJson from "../package.json";
 import { isInstalledPahcer } from "./pahcer";
+import { server } from "./server";
 
 const program = new Command().option("-c, --cwd <path>", "Set the project directory");
 
@@ -22,4 +23,4 @@ if (!(await isInstalledPahcer())) {
 	process.exit(1);
 }
 
-// server.start({ transportType: "stdio" });
+server.start({ transportType: "stdio" });

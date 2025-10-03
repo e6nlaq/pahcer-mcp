@@ -1,3 +1,4 @@
+import { $ } from "bun";
 import { FastMCP } from "fastmcp";
 import { z } from "zod";
 import packageJson from "../package.json";
@@ -8,13 +9,21 @@ export const server = new FastMCP({
 });
 
 server.addTool({
-	name: "add",
-	description: "Add two numbers",
+	name: "change_project_directory",
+	description: "Change the project directory",
 	parameters: z.object({
-		a: z.number(),
-		b: z.number(),
+		path: z.string(),
 	}),
 	execute: async (args) => {
-		return String(args.a + args.b);
+		await $.cwd(args.path);
+	},
+});
+
+server.addTool({
+	name: "get_project_directory",
+	description: "Get the project directory",
+	parameters: z.object({}),
+	execute: async () => {
+		return await $`pwd`.text();
 	},
 });
