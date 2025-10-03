@@ -1,7 +1,8 @@
 import { $ } from "bun";
 import { FastMCP } from "fastmcp";
-import { z } from "zod";
+import * as z from "zod";
 import packageJson from "../package.json";
+import { directoryExists } from "./util";
 
 export const server = new FastMCP({
 	name: "Pahcer MCP Server",
@@ -12,7 +13,7 @@ server.addTool({
 	name: "change_project_directory",
 	description: "Change the project directory",
 	parameters: z.object({
-		path: z.string(),
+		path: z.string().refine((path) => directoryExists(path), { error: "Directory does not exist" }),
 	}),
 	execute: async (args) => {
 		await $.cwd(args.path);
