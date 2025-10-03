@@ -9,6 +9,7 @@ export async function directoryExists(path: string): Promise<boolean> {
 	try {
 		const stats = await stat(path);
 		return stats.isDirectory();
+		// biome-ignore lint/suspicious/noExplicitAny: off
 	} catch (error: any) {
 		if (error.code === "ENOENT") {
 			return false;
