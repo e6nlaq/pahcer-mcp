@@ -2,7 +2,7 @@ import { $ } from "bun";
 import { FastMCP } from "fastmcp";
 import * as z from "zod";
 import packageJson from "../package.json";
-import { directoryExists } from "./util";
+import { directoryExists, pwd } from "./util";
 
 export const server = new FastMCP({
 	name: "Pahcer MCP Server",
@@ -13,10 +13,10 @@ server.addTool({
 	name: "change_project_directory",
 	description: "Change the project directory",
 	parameters: z.object({
-		path: z.string().refine((path) => directoryExists(path), { error: "Directory does not exist" }),
+		fullpath: z.string().refine((path) => directoryExists(path), { error: "Directory does not exist" }),
 	}),
 	execute: async (args) => {
-		await $.cwd(args.path);
+		await $.cwd(args.fullpath);
 	},
 });
 
@@ -25,6 +25,6 @@ server.addTool({
 	description: "Get the project directory",
 	parameters: z.object({}),
 	execute: async () => {
-		return await $`pwd`.text();
+		return await pwd();
 	},
 });

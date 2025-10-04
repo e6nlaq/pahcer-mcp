@@ -1,4 +1,5 @@
 import { stat } from "node:fs/promises";
+import { $ } from "bun";
 
 /**
  * Checks if a directory exists at the given path.
@@ -16,4 +17,13 @@ export async function directoryExists(path: string): Promise<boolean> {
 		}
 		throw error;
 	}
+}
+
+export async function fileExists(path: string): Promise<boolean> {
+	const file = Bun.file(path);
+	return await file.exists();
+}
+
+export async function pwd() {
+	return await $`pwd`.text();
 }
