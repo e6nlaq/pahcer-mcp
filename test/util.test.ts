@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeAll, afterAll } from "bun:test";
 import { mkdir, rm } from "node:fs/promises";
-import { directoryExists } from "../src/util";
+import { directoryExists, fileExists, pwd } from "../src/util";
 
 describe("directoryExists", () => {
 	const tempDir = "temp-test-dir";
@@ -31,5 +31,26 @@ describe("directoryExists", () => {
 		expect(await directoryExists(newDir)).toBe(true);
 		await rm(newDir, { recursive: true, force: true });
 		expect(await directoryExists(newDir)).toBe(false);
+	});
+});
+
+describe("fileExists", () => {
+	it("should return true for an existing file", async () => {
+		expect(await fileExists("package.json")).toBe(true);
+	});
+
+	it("should return false for a non-existent file", async () => {
+		expect(await fileExists("non-existent-file")).toBe(false);
+	});
+
+	it("should return false for a directory", async () => {
+		expect(await fileExists("src")).toBe(false);
+	});
+});
+
+describe("pwd", () => {
+	it("should return the current working directory", async () => {
+		const currentDir = await pwd();
+		expect(currentDir.trim()).toBe(process.cwd());
 	});
 });
